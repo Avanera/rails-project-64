@@ -49,6 +49,11 @@ gem 'bootsnap', require: false
 # Slim is a template language whose goal is to reduce the view syntax to the essential parts
 gem 'slim-rails'
 
+# Sentry's Ruby SDK allows users to report messages, exceptions, and tracing events.
+gem 'stackprof'
+gem 'sentry-ruby'
+gem 'sentry-rails'
+
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
 # gem "image_processing", "~> 1.2"
 
