@@ -23,4 +23,4 @@ lint:
 lint-fix:
 	bundle exec rubocop -A
 
-.PHONY: test
+.PHONY: install lint test
