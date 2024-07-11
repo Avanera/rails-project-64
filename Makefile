@@ -3,11 +3,11 @@ start:
 	bin/rails s -b 0.0.0.0
 
 setup:
-	install
+	bin/setup
 	db-prepare
 
 install:
-	bin/setup
+	bundle check || bundle install
 
 db-prepare:
 	bin/rails db:reset

@@ -7,6 +7,10 @@ AllCops:
     - 'config/**/*'
     - 'script/**/*'
     - 'bin/*'
+    - 'Gemfile'
 
 Style/Documentation:
+  Enabled: false
+
+Rails/I18nLocaleTexts:
   Enabled: false
