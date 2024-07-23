@@ -1,11 +1,16 @@
-h1 Posts
-
+h1 Коллективный блог
 #posts
-  - @posts.each do |post|
-    == render post
-    p
-      = link_to 'Show this post', post
+- @posts.each do |post|
+  .card.my-3
+    .card-body
+      h5.card-title
+        = link_to post.title, post, class: 'link-dark text-decoration-none'
+      p.card-text
+        = truncate post.body, length: 300
 
-= link_to 'New post', new_post_path
-button.btn.btn-lg.btn-danger type='button' data-bs-toggle='popover' title='Popover title' data-bs-content='Amazing content, right?'
-  | Click to toggle popover
+button.btn.btn-lg.btn-danger[
+  type='button'
+  data-bs-toggle='popover'
+  title='Popover title'
+  data-bs-content='Amazing content, right?']
+    | Click to toggle popover

@@ -4,7 +4,6 @@
     h1.mb-3 = @post.title
     p = @post.body
 
-div
-  = button_to 'Edit this post', edit_post_path(@post)
-
-  = button_to 'Destroy this post', @post, method: :delete
+  .btn-group.btn-group-sm role='group' aria-label='Basic outlined example'
+    = button_to 'Редактировать', edit_post_path(@post), method: :get, class: 'btn btn-primary'
+    = button_to 'Удалить', @post, method: :delete, class: 'btn btn-outline-danger'
