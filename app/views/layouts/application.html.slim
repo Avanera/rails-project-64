@@ -10,11 +10,13 @@ html
     = javascript_include_tag 'application', 'data-turbo-track': 'reload', type: 'module'
   body
 
-    = render 'layouts/application/nav'
+    header
+      = render 'layouts/application/nav'
 
-    .container.my-4
-      = render 'layouts/application/flash'
-      = yield
+    main.mt-5.pt-3
+      .container
+        = render 'layouts/application/flash'
+        = yield
 
   footer
     .container.footer.sticky-bottom.py-3.bg-light.text-muted
