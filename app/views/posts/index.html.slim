@@ -3,14 +3,16 @@ h1 Коллективный блог
 - @posts.each do |post|
   .card.my-3
     .card-body
+      p.card-subtitle.text-body-secondary
+        = post.category.name
       h5.card-title
         = link_to post.title, post, class: 'link-dark text-decoration-none'
+
       p.card-text
         = truncate post.body, length: 300
-
-button.btn.btn-lg.btn-danger[
-  type='button'
-  data-bs-toggle='popover'
-  title='Popover title'
-  data-bs-content='Amazing content, right?']
-    | Click to toggle popover
+      small
+        | Posted:
+        =< l(post.created_at, format: :short)
+        | &nbsp; &nbsp; &nbsp;
+        | By:
+        =< post.creator.email

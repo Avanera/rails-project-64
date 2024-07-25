@@ -1,9 +1,20 @@
 .container.my-4
-  =< link_to 'Back to posts', posts_path
+  => link_to 'Posts', posts_path
+  | /
+  =< @post.category.name
+
   div id="#{dom_id @post}"
+    .small.mt-3
+        | Posted:
+        =< l(@post.created_at, format: :short)
+        | &nbsp; &nbsp; &nbsp;
+        | By:
+        =< @post.creator.email
+
     h1.mb-3 = @post.title
+
     p = @post.body
 
-  .btn-group.btn-group-sm role='group' aria-label='Basic outlined example'
+  .btn-group.btn-group-sm.mt-3 role='group' aria-label='Basic outlined example'
     = button_to 'Редактировать', edit_post_path(@post), method: :get, class: 'btn btn-primary'
     = button_to 'Удалить', @post, method: :delete, class: 'btn btn-outline-danger'

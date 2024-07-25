@@ -14,5 +14,10 @@
     = form.label :body, style: 'display: block'
     = form.text_area :body, class: 'form-control', rows: '10'
 
+  .mb-2
+    = form.label :category, style: 'display: block'
+    = form.select :category_id,
+      Category.order(:name).map { |cat| [cat.name, cat.id] }, {}, { class: 'form-control' }
+
   div
     = form.submit 'Опубликовать', class: 'btn btn-primary'
