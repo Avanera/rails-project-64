@@ -6,8 +6,8 @@ class PostsControllerTest < ActionDispatch::IntegrationTest
   include Devise::Test::IntegrationHelpers
 
   setup do
-    @post = posts(:one)
     sign_in users(:one)
+    @post = posts(:one)
   end
 
   test 'should get index' do
@@ -22,9 +22,14 @@ class PostsControllerTest < ActionDispatch::IntegrationTest
 
   test 'should create post' do
     assert_difference('Post.count') do
-      post posts_url, params: { post: { body: @post.body, title: @post.title } }
+      post posts_url, params: { post: {
+        body: @post.body,
+        title: @post.title,
+        category_id: categories(:one).id
+      } }
     end
 
+    assert_equal(Post.last.creator, users(:one))
     assert_redirected_to post_url(Post.last)
   end
 
@@ -39,7 +44,16 @@ class PostsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test 'should update post' do
-    patch post_url(@post), params: { post: { body: @post.body, title: @post.title } }
+    assert_equal(@post.category, categories(:one))
+
+    patch post_url(@post), params: { post: {
+      body: @post.body,
+      title: @post.title,
+      category_id: categories(:two).id
+    } }
+
+    @post.reload
+    assert_equal(@post.category, categories(:two))
     assert_redirected_to post_url(@post)
   end
 
