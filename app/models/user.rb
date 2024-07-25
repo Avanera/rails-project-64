@@ -7,4 +7,5 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   has_many :posts, dependent: nil, inverse_of: 'creator'
+  has_many :comments, class_name: 'PostComment', dependent: :destroy
 end

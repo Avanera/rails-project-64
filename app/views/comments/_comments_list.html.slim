@@ -1,0 +1,12 @@
+- @post.comments.each do |comment|
+  .card.card-body.py-0.my-3
+    p.card-text
+      small
+        =< comment.user.email
+        | &nbsp; &nbsp; &nbsp;
+        =< l(comment.created_at, format: :short)
+        br
+        = comment.content
+        | &nbsp;
+        - if comment.user == current_user
+          = link_to 'Удалить', comment_path, data: { turbo_method: :delete, turbo_confirm: 'Sure?' }

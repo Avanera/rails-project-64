@@ -7,7 +7,7 @@ class PostsControllerTest < ActionDispatch::IntegrationTest
 
   setup do
     sign_in users(:one)
-    @post = posts(:one)
+    @post = posts(:without_comments)
   end
 
   test 'should get index' do
@@ -44,16 +44,16 @@ class PostsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test 'should update post' do
-    assert_equal(@post.category, categories(:one))
+    assert_equal(@post.category, categories(:two))
 
     patch post_url(@post), params: { post: {
       body: @post.body,
       title: @post.title,
-      category_id: categories(:two).id
+      category_id: categories(:one).id
     } }
 
     @post.reload
-    assert_equal(@post.category, categories(:two))
+    assert_equal(@post.category, categories(:one))
     assert_redirected_to post_url(@post)
   end
 

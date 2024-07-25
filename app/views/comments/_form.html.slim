@@ -1,0 +1,14 @@
+= form_with(model: comment, url:) do |form|
+  - if comment.errors.any?
+    div style='color: red'
+      h2 = "#{pluralize(post.errors.count, 'error')} prohibited this post from being saved:"
+      ul
+        - post.errors.each do |error|
+          li = error.full_message
+
+  .mb-2
+    = form.label 'Leave your comment here:', style: 'display: block'
+    = form.text_area :content, class: 'form-control'
+
+  div
+    = form.submit 'Create comment', class: 'btn btn-primary'

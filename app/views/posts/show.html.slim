@@ -17,4 +17,13 @@
 
   .btn-group.btn-group-sm.mt-3 role='group' aria-label='Basic outlined example'
     = button_to 'Редактировать', edit_post_path(@post), method: :get, class: 'btn btn-primary'
-    = button_to 'Удалить', @post, method: :delete, class: 'btn btn-outline-danger'
+
+    p
+      = link_to 'Удалить',
+        post_path(@post),
+        data: { turbo_method: :delete, turbo_confirm: 'Sure?' },
+        class: 'btn btn-outline-danger'
+
+  = render '/comments/comments_list'
+
+  = render '/comments/form', comment: @post.comments.build, url: post_comments_path(@post)
