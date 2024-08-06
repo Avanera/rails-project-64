@@ -15,17 +15,21 @@
 
     p = @post.body
 
-  .btn-group.btn-group-sm.mt-3 role='group' aria-label='Post button group'
-    = button_to 'Редактировать', edit_post_path(@post), method: :get, class: 'btn btn-primary'
+    = @post.post_likes.count
+    = render_post_likes_icon(@post)
 
-    p
-      = link_to 'Удалить',
-        post_path(@post),
-        data: { turbo_method: :delete, turbo_confirm: 'Sure?' },
-        class: 'btn btn-outline-danger'
+  - if current_user && @post.creator == current_user
+    .btn-group.btn-group-sm.mt-3 role='group' aria-label='Post button group'
+      = button_to 'Редактировать', edit_post_path(@post), method: :get, class: 'btn btn-primary'
+
+      p = link_to 'Удалить',
+          post_path(@post),
+          data: { turbo_method: :delete, turbo_confirm: 'Sure?' },
+          class: 'btn btn-outline-danger'
+
+  - if current_user
+    = render '/comments/form', comment: @post.comments.build, url: post_comments_path(@post)
 
   = render partial: '/comments/comment',
     collection: @post.comments.where(ancestry: nil) \
       .order(created_at: :desc).reject(&:new_record?)
-
-  = render '/comments/form', comment: @post.comments.build, url: post_comments_path(@post)

@@ -8,4 +8,5 @@ class User < ApplicationRecord
 
   has_many :posts, dependent: nil, inverse_of: 'creator'
   has_many :comments, class_name: 'PostComment', dependent: :destroy
+  has_many :post_likes, dependent: :destroy
 end
