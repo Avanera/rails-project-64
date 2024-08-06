@@ -9,6 +9,6 @@
   .mb-2
     = form.label 'Leave your comment here:', style: 'display: block'
     = form.text_area :content, class: 'form-control'
-
+    = form.hidden_field :parent_id
   div
     = form.submit 'Create comment', class: 'btn btn-primary'

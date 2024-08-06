@@ -1,0 +1,32 @@
+.card.card-body.py-0.my-3
+  .card-header.border-0
+    small
+      =< comment.user.email
+      | &nbsp; &nbsp; &nbsp;
+      =< l(comment.created_at, format: :short)
+
+  .card-text
+    = comment.content
+    | &nbsp;
+    - if comment.user == current_user
+      = link_to 'Удалить',
+        comment_path(comment),
+        data: { turbo_method: :delete, turbo_confirm: 'Sure?' }
+
+  .card-footer.border-0
+    a.fs-6.text-decoration-underline.text-lowercase.collapsed [
+      data-bs-toggle='collapse'
+      href='#' type='button'
+      data-bs-target="#response_comment-#{comment.id}"
+      aria-expanded='false'
+      aria-controls="response_comment-#{comment.id}"
+    ]
+      | ответить
+    div class='collapse' id="response_comment-#{comment.id}"
+      = render '/comments/form',
+        comment: @post.comments.build(parent_id: comment.id),
+        url: post_comments_path(@post)
+
+  - if comment.has_children?
+    = render partial: '/comments/comment',
+      collection: comment.children.order(created_at: :desc).reject(&:new_record?)

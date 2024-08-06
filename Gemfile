@@ -57,6 +57,9 @@ gem 'sentry-rails'
 # a flexible authentication solution for Rails based on Warden
 gem "devise", "~> 4.9"
 
+# Ancestry is a gem that allows rails ActiveRecord models to be organized as a tree structure (or hierarchy)
+gem 'ancestry'
+
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
 # gem "image_processing", "~> 1.2"
 
