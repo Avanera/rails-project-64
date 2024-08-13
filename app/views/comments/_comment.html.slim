@@ -9,9 +9,9 @@
     = comment.content
     | &nbsp;
     - if comment.user == current_user
-      = link_to 'Удалить',
+      = link_to t('comments.delete'),
         comment_path(comment),
-        data: { turbo_method: :delete, turbo_confirm: 'Sure?' }
+        data: { turbo_method: :delete, turbo_confirm: t('actions.delete.confirm') }
 
   - if current_user
     .card-footer.border-0
@@ -22,7 +22,8 @@
         aria-expanded='false'
         aria-controls="response_comment-#{comment.id}"
       ]
-        | ответить
+        = t('comments.answer')
+
       div class='collapse' id="response_comment-#{comment.id}"
         = render '/comments/form',
           comment: @post.comments.build(parent_id: comment.id),

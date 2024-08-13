@@ -3,9 +3,63 @@ ru:
     en: Switch to English
     ru: Перейти на Русский
 
+  actions:
+    back: Назад
+    delete:
+      confirm: Вы уверены?
+
+  auth:
+    log_in: Войти
+    log_out: Выйти
+    sign_up: Зарегистрироваться
+
+  comments:
+    answer: Ответить
+    created: Комментарий создан.
+    creation:
+      errors:
+        one: "%{count} ошибка не позволила сохранить этот комментарий:"
+        few: "%{count} ошибки не позволили сохранить этот комментарий:"
+        many: "%{count} ошибок не позволили сохранить этот комментарий:"
+    delete: Удалить
+    destroyed: Комментарий удален.
+    label: 'Оставьте свой комментарий тут:'
+    submit: Опубликовать комментарий
+
+  devise:
+    registrations:
+      signed_up: Добро пожаловать, вы создали аккаунт
+    sessions:
+      signed_in: Добро пожаловать, вы успешно вошли в свой аккаунт
+      signed_out: Вы вышли из аккаунта
+
+  footer:
+    contact_us: 'Свяжитесь с нами: support@example.com'
+    powered: Работает на Ruby on Rails | Devise | Bootstrap
+
+  posts:
+    actions:
+      created: Пост был успешно создан.
+      creation:
+        errors:
+          one: "%{count} ошибка не позволила сохранить этот пост:"
+          few: "%{count} ошибки не позволили сохранить этот пост:"
+          many: "%{count} ошибок не позволили сохранить этот пост:"
+      delete: Удалить
+      deleted: Пост был удален.
+      editing: Редактирование поста
+      update: Редактировать
+      updated: Пост был успешно отредактирован.
+      submit: Опубликовать
+    all: Все посты
+    body: Содержание
+    by: Автор
+    category: Категория
+    new: Новый пост
+    published: Опубликовано
+    posts: Посты
+    title: Заголовок
+
   time:
     formats:
       short: "%d.%m.%Y %H:%M"
-
-  posts:
-    new: Новый пост

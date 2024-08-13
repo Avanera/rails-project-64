@@ -32,11 +32,61 @@ en:
     en: Switch to English
     ru: Перейти на Русский
 
-  hello: "Hello world"
+  actions:
+    back: Back
+    delete:
+      confirm: Are you sure?
+
+  auth:
+    log_in: Log In
+    log_out: Log Out
+    sign_up: Sign Up
+
+  comments:
+    answer: Answer
+    created: Comment was created.
+    creation:
+      errors:
+        one: "%{count} error prohibited this comment from being saved:"
+        other: "%{count} errors prohibited this comment from being saved:"
+    delete: Delete
+    destroyed: Comment was deleted.
+    label: 'Leave your comment here:'
+    submit: Publish Comment
+
+  devise:
+    registrations:
+      signed_up: Welcome, you have signed up
+    sessions:
+      signed_in: Welcome, you were successfully signed in
+      signed_out: You were logged out
+
+  footer:
+    contact_us: 'Contact us at: support@example.com'
+    powered: Powered by Ruby on Rails | Devise | Bootstrap
+
+  posts:
+    actions:
+      created: Post was successfully created.
+      creation:
+        errors:
+          one: "%{count} error prohibited this post from being saved:"
+          other: "%{count} errors prohibited this post from being saved:"
+      delete: Delete
+      deleted: Post was successfully destroyed.
+      editing: Editing Post
+      update: Update
+      updated: Post was successfully updated.
+      submit: Publish
+    all: All Posts
+    body: Body
+    by: By
+    category: Category
+    new: New post
+    published: Published
+    posts: Posts
+    title: Title
 
   time:
     formats:
       short: "%m.%d.%Y %H:%M"
-
-  posts:
-    new: New Post

@@ -1,6 +1,6 @@
 .d-flex.py-2
-  .me-2 = link_to 'Все посты', posts_path
-  .ms-2 = link_to 'Назад', :back
-h1 Editing post
+  .me-2 = link_to t('posts.all'), posts_path
+  .ms-2 = link_to t('actions.back'), :back
+h1 = t('posts.actions.editing')
 
 = render 'form', post: @post

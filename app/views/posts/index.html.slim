@@ -11,8 +11,10 @@ h1 Коллективный блог
       p.card-text
         = truncate post.body, length: 300
       small
-        | Posted:
+        = t('posts.published')
+        | :
         =< l(post.created_at, format: :short)
         | &nbsp; &nbsp; &nbsp;
-        | By:
+        = t('posts.by')
+        | :
         =< post.creator.email
