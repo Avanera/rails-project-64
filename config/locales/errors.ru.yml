@@ -1,0 +1,17 @@
+ru:
+  errors:
+    messages:
+      already_confirmed: уже подтверждён. Пожалуйста, попробуйте войти в систему
+      blank: не может быть пустым
+      confirmation_period_expired: должен быть подтвержден в течение %{period}, пожалуйста, повторите запрос на подтверждение
+      expired: устарела. Пожалуйста, запросите новую
+      not_found: не найден
+      not_locked: не заблокирован
+      not_saved:
+        one: "%{resource}: сохранение не удалось из-за %{count} ошибки:"
+        few: "%{resource}: сохранение не удалось из-за %{count} ошибок:"
+        many: "%{resource}: сохранение не удалось из-за %{count} ошибок:"
+        other: "%{resource}: сохранение не удалось из-за %{count} ошибок:"
+      too_short: слишком короткий
+      confirmation: не совпадает
+      taken: уже занят

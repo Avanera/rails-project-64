@@ -54,13 +54,6 @@ en:
     label: 'Leave your comment here:'
     submit: Publish Comment
 
-  devise:
-    registrations:
-      signed_up: Welcome, you have signed up
-    sessions:
-      signed_in: Welcome, you were successfully signed in
-      signed_out: You were logged out
-
   footer:
     contact_us: 'Contact us at: support@example.com'
     powered: Powered by Ruby on Rails | Devise | Bootstrap

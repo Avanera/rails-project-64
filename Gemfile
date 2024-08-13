@@ -56,6 +56,7 @@ gem 'sentry-rails'
 
 # a flexible authentication solution for Rails based on Warden
 gem "devise", "~> 4.9"
+gem 'devise-i18n'
 
 # Ancestry is a gem that allows rails ActiveRecord models to be organized as a tree structure (or hierarchy)
 gem 'ancestry'

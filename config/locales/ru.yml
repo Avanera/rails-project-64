@@ -26,13 +26,6 @@ ru:
     label: 'Оставьте свой комментарий тут:'
     submit: Опубликовать комментарий
 
-  devise:
-    registrations:
-      signed_up: Добро пожаловать, вы создали аккаунт
-    sessions:
-      signed_in: Добро пожаловать, вы успешно вошли в свой аккаунт
-      signed_out: Вы вышли из аккаунта
-
   footer:
     contact_us: 'Свяжитесь с нами: support@example.com'
     powered: Работает на Ruby on Rails | Devise | Bootstrap
