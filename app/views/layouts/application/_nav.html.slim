@@ -16,11 +16,17 @@ nav class='container navbar navbar-expand-md d-flex py-2 border-bottom\
   .collapse.navbar-collapse.justify-content-end id='navbarSupportedContent'
     .d-flex
       ul.nav
+
+        - I18n.available_locales.each do |locale|
+          li
+            - unless I18n.locale == locale
+              = link_to t(locale, scope: 'locales'), url_for(lang: locale), class: 'btn'
+
         - if user_signed_in?
           li.nav-link.disabled
             = current_user.email
           li.nav-item
-            = link_to 'New post', new_post_path, class: 'btn'
+            = link_to t('posts.new'), new_post_path, class: 'btn'
           li.nav-item
             = link_to 'Log out',
               destroy_user_session_path,

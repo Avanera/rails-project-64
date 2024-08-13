@@ -28,4 +28,15 @@
 #       enabled: "ON"
 
 en:
+  locales:
+    en: Switch to English
+    ru: Перейти на Русский
+
   hello: "Hello world"
+
+  time:
+    formats:
+      short: "%m.%d.%Y %H:%M"
+
+  posts:
+    new: New Post

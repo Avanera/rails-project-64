@@ -1,4 +1,11 @@
 ru:
+  locales:
+    en: Switch to English
+    ru: Перейти на Русский
+
   time:
     formats:
       short: "%d.%m.%Y %H:%M"
+
+  posts:
+    new: Новый пост
