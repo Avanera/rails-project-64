@@ -11,10 +11,12 @@
   .mb-2
     = form.label :title, t('posts.title'), style: 'display: block'
     = form.text_field :title, class: 'form-control'
+    small.form-text.text-muted = "5-255 #{t('posts.symbols')}"
 
   .mb-2
     = form.label :body, t('posts.body'), style: 'display: block'
     = form.text_area :body, class: 'form-control', rows: '10'
+    small.form-text.text-muted = "200-4000 #{t('posts.symbols')}"
 
   .mb-2
     = form.label :category, t('posts.category'), style: 'display: block'

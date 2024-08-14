@@ -33,6 +33,19 @@ class PostsControllerTest < ActionDispatch::IntegrationTest
     assert_redirected_to post_url(Post.last)
   end
 
+  test 'should NOT create post when params not valid' do
+    assert_no_difference('Post.count') do
+      post posts_url, params: { post: {
+        body: 'not enough chars',
+        title: '',
+        category_id: ''
+      } }
+    end
+
+    assert_response :unprocessable_entity
+    assert_select 'form'
+  end
+
   test 'should show post' do
     get post_url(@post)
     assert_response :success

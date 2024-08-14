@@ -1,13 +1,12 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
-
 with_comments:
-  title: MyString
-  body: MyText
+  title: <%= Faker::Lorem.sentence(word_count: 5) %>
+  body: <%= Faker::Lorem.paragraph_by_chars(number: 210, supplemental: false) %>
   creator: one
   category: one
 
 without_comments:
-  title: MyString
-  body: MyText
+  title: <%= Faker::Lorem.sentence(word_count: 5) %>
+  body: <%= Faker::Lorem.paragraph_by_chars(number: 210, supplemental: false) %>
   creator: two
   category: two
