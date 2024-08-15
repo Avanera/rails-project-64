@@ -71,3 +71,8 @@ ru:
   time:
     formats:
       short: "%d.%m.%Y %H:%M"
+
+  views:
+    posts:
+      index:
+        title: Коллективный блог

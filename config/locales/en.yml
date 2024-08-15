@@ -85,3 +85,8 @@ en:
   time:
     formats:
       short: "%m.%d.%Y %H:%M"
+
+  views:
+    posts:
+      index:
+        title: Collective blog

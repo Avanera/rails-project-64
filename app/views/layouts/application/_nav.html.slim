@@ -20,7 +20,7 @@ nav class='container navbar navbar-expand-md d-flex py-2 border-bottom\
         - I18n.available_locales.each do |locale|
           li
             - unless I18n.locale == locale
-              = link_to t(locale, scope: 'locales'), url_for(lang: locale), class: 'btn'
+              = link_to t(locale, scope: 'locales'), url_for(locale:), class: 'btn'
 
         - if user_signed_in?
           li.nav-link.disabled

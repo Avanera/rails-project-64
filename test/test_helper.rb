@@ -12,6 +12,8 @@ module ActiveSupport
     # Setup all fixtures in test/fixtures/*.yml for all tests in alphabetical order.
     fixtures :all
 
-    # Add more helper methods to be used by all tests here...
+    def setup
+      self.default_url_options = { locale: I18n.default_locale }
+    end
   end
 end
