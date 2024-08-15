@@ -7,10 +7,10 @@ class CommentsController < ApplicationController
 
     @comment = post.comments.build(comment_params)
     @comment.user = current_user
-    if @comment.save!
+    if @comment.save
       redirect_to post_path(post), notice: t('comments.created')
     else
-      render :new, status: :unprocessble_entity
+      redirect_to post_path(post), alert: t('activerecord.errors.models.post_comment.content.blank')
     end
   end
 
