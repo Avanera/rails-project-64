@@ -1,27 +1,16 @@
-= form_with(model: post) do |form|
-  - if post.errors.any?
-    div style='color: red'
-      h2 = "#{pluralize(post.errors.count, 'error')} prohibited this post from being saved:"
-      h2 = t('.posts.actions.creation.errors', count: post.errors.count)
+= simple_form_for(post) do |f|
+  = f.error_notification
+  - if f.object.errors[:base].present?
+    = f.error_notification message: f.object.errors[:base].to_sentence
 
-      ul
-        - post.errors.each do |error|
-          li = error.full_message
+  .form-inputs
+    = f.input :title,
+      hint: "5-255 #{t('posts.symbols')}",
+      input_html: { maxlength: 255 }
+    = f.input :body,
+      hint: "200-4000 #{t('posts.symbols')}",
+      input_html: { maxlength: 4000 }
+    = f.association :category
 
-  .mb-2
-    = form.label :title, t('posts.title'), style: 'display: block'
-    = form.text_field :title, class: 'form-control'
-    small.form-text.text-muted = "5-255 #{t('posts.symbols')}"
-
-  .mb-2
-    = form.label :body, t('posts.body'), style: 'display: block'
-    = form.text_area :body, class: 'form-control', rows: '10'
-    small.form-text.text-muted = "200-4000 #{t('posts.symbols')}"
-
-  .mb-2
-    = form.label :category, t('posts.category'), style: 'display: block'
-    = form.select :category_id,
-      Category.order(:name).map { |cat| [cat.name, cat.id] }, {}, { class: 'form-control' }
-
-  div
-    = form.submit t('posts.actions.submit'), class: 'btn btn-primary'
+  .form-actions.mb-3
+    = f.button :submit, class: 'btn btn-primary'

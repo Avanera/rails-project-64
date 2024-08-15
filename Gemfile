@@ -49,6 +49,9 @@ gem 'bootsnap', require: false
 # Slim is a template language whose goal is to reduce the view syntax to the essential parts
 gem 'slim-rails'
 
+# Rails forms made easy.
+gem 'simple_form'
+
 # Sentry's Ruby SDK allows users to report messages, exceptions, and tracing events.
 gem 'stackprof'
 gem 'sentry-ruby'
