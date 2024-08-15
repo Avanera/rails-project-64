@@ -4,6 +4,8 @@ class LikesController < ApplicationController
   before_action :authenticate_user!
   def create
     post = Post.find(params[:post_id])
+    return if post.post_likes.exists?(user_id: current_user.id)
+
     post.post_likes.create(user: current_user)
     redirect_to post_path(post)
   end
