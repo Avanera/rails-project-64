@@ -3,6 +3,17 @@ ru:
     en: Switch to English
     ru: Перейти на Русский
 
+  support:
+    array:
+      last_word_connector: ' и '
+      two_words_connector: ' и '
+
+  helpers:
+    submit:
+      post:
+        create: Опубликовать
+        update: Редактировать
+
   actions:
     back: Назад
     delete:

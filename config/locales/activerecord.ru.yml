@@ -25,9 +25,28 @@ ru:
         unconfirmed_email: Неподтвержденный email
         unlock_token: Токен разблокировки
         updated_at: Дата обновления
+      post:
+        category: Категория
+        title: Заголовок
+        body: Содержание
     models:
       user:
         few: Пользователя
         many: Пользователей
         one: Пользователь
         other: Пользователи
+      post:
+        few: Поста
+        many: Постов
+        one: Пост
+        other: Постов
+    errors:
+      models:
+        post:
+          attributes:
+            category:
+              required: не может отсутствовать
+            title:
+              too_short: недостаточной длины (не может быть меньше 5 символов)
+            body:
+              too_short: недостаточной длины (не может быть меньше 200 символов)
