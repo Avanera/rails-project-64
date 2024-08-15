@@ -29,6 +29,8 @@ ru:
         category: Категория
         title: Заголовок
         body: Содержание
+      post_comment:
+        content: Ваш комментарий
     models:
       user:
         few: Пользователя
@@ -40,6 +42,11 @@ ru:
         many: Постов
         one: Пост
         other: Постов
+      post_comment:
+        few: Комментария
+        many: Комментариев
+        one: Комментарий
+        other: Комментария
     errors:
       models:
         post:
@@ -50,3 +57,6 @@ ru:
               too_short: недостаточной длины (не может быть меньше 5 символов)
             body:
               too_short: недостаточной длины (не может быть меньше 200 символов)
+        post_comment:
+          content:
+            blank: Тело комментария не может быть пустым

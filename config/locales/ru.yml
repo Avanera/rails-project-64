@@ -13,6 +13,8 @@ ru:
       post:
         create: Опубликовать
         update: Редактировать
+      post_comment:
+        create: Опубликовать комментарий
 
   actions:
     back: Назад

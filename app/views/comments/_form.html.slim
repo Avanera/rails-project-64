@@ -1,15 +1,11 @@
-= form_with(model: comment, url:) do |form|
-  - if comment.errors.any?
-    div style='color: red'
-      h2 = "#{pluralize(comment.errors.count, 'error')} prohibited this comment from being saved:"
-      / h2 = t('.comments.actions.creation.errors', count: comment.errors.count)
-      ul
-        - post.errors.each do |error|
-          li = error.full_message
+= simple_form_for(comment, url:) do |f|
+  = f.error_notification
+  - if f.object.errors[:base].present?
+    = f.error_notification message: f.object.errors[:base].to_sentence
 
-  .mb-2
-    = form.label t('comments.label'), style: 'display: block'
-    = form.text_area :content, class: 'form-control'
-    = form.hidden_field :parent_id
-  div
-    = form.submit t('comments.submit'), class: 'btn btn-primary'
+  .form-inputs
+    = f.input :content, input_html: { maxlength: 255 }
+    = f.hidden_field :parent_id
+
+  .form-actions.mb-3
+    = f.button :submit, class: 'btn btn-primary'

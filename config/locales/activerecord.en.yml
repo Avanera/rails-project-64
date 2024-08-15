@@ -1,0 +1,10 @@
+en:
+  activerecord:
+    attributes:
+      post_comment:
+        content: Your comment
+    errors:
+      models:
+        post_comment:
+          content:
+            blank: The body of the comment can not be blank
