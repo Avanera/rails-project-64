@@ -60,3 +60,9 @@ ru:
         post_comment:
           content:
             blank: Тело комментария не может быть пустым
+        user:
+          attributes:
+            password:
+              too_short: недостаточной длины (не может быть меньше 6 символов)
+            email:
+              invalid: имеет неверное значение
