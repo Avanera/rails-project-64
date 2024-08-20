@@ -2,10 +2,11 @@
 
 class PostsController < ApplicationController
   before_action :authenticate_user!, only: %i[new edit create update destroy]
-  before_action :set_post, only: %i[show edit update destroy]
+  before_action :set_post, only: %i[edit update]
+  before_action :set_post_with_comments, only: %i[show destroy]
 
   def index
-    @posts = Post.order(created_at: :desc)
+    @posts = Post.includes(:category, :creator).order(created_at: :desc)
   end
 
   def show; end
@@ -45,6 +46,13 @@ class PostsController < ApplicationController
   # Use callbacks to share common setup or constraints between actions.
   def set_post
     @post = Post.find(params[:id])
+  end
+
+  def set_post_with_comments
+    @post = Post
+            .joins(:category, :creator)
+            .includes(:post_likes, comments: :user)
+            .find(params[:id])
   end
 
   # Only allow a list of trusted parameters through.

@@ -2,20 +2,16 @@
 
 class LikesController < ApplicationController
   before_action :authenticate_user!
+
   def create
     post = Post.find(params[:post_id])
-    return if post.post_likes.exists?(user_id: current_user.id)
-
-    post.post_likes.create(user: current_user)
+    post.post_likes.find_or_create_by(user: current_user)
     redirect_to post_path(post)
   end
 
   def destroy
-    like = PostLike.find(params[:id])
-    return if like.user != current_user
-
-    post = like.post
-    like.destroy
+    post = Post.find(params[:post_id])
+    post.post_likes.find_by(user: current_user)&.destroy
 
     redirect_to post_path(post)
   end

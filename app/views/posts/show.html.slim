@@ -17,7 +17,7 @@
 
     p = @post.body
 
-    = @post.post_likes.count
+    = @post.post_likes_count
     = render_post_likes_icon(@post)
 
   - if current_user && @post.creator == current_user
@@ -36,5 +36,4 @@
     = render '/comments/form', comment: @post.comments.build, url: post_comments_path(@post)
 
   = render partial: '/comments/comment',
-    collection: @post.comments.where(ancestry: nil) \
-      .order(created_at: :desc).reject(&:new_record?)
+    collection: @post.comments.where(ancestry: nil).order(created_at: :desc).to_a

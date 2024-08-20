@@ -14,7 +14,7 @@ module PostsHelper
   def icon_with_a_link(post)
     like = current_post_like(post)
     if like
-      link_to like_path(like), data: { turbo_method: :delete }, class: 'text-dark' do
+      link_to post_like_path(post, like), data: { turbo_method: :delete }, class: 'text-dark' do
         content_tag(:i, '', class: 'i bi bi-hand-thumbs-up-fill')
       end
     else
@@ -27,6 +27,6 @@ module PostsHelper
   def current_post_like(post)
     return unless current_user
 
-    post.post_likes.find_by(user_id: current_user.id)
+    post.post_likes.find { |like| like.user_id == current_user.id }
   end
 end

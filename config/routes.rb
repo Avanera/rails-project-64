@@ -8,7 +8,7 @@ Rails.application.routes.draw do
   scope "/:locale" do
     resources :posts do
       resources :comments, shallow: true, only: %i[create destroy]
-      resources :likes, shallow: true, only: %i[create destroy]
+      resources :likes, only: %i[create destroy]
     end
   end
 end

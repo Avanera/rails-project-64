@@ -18,11 +18,12 @@ class LikesControllerTest < ActionDispatch::IntegrationTest
 
   test 'should destroy a like' do
     sign_in users(:one)
+    like = PostLike.last
 
-    assert_equal(PostLike.last.user, users(:one))
+    assert_equal(like.user, users(:one))
 
     assert_difference('PostLike.count', -1) do
-      delete like_path(PostLike.last)
+      delete post_like_path(like.post, like)
     end
 
     assert_redirected_to post_path(posts(:with_comments))
