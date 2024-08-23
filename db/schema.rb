@@ -11,9 +11,6 @@
 # It's strongly recommended that you check this file into your version control system.
 
 ActiveRecord::Schema[7.1].define(version: 2024_08_19_164215) do
-  # These are extensions that must be enabled in order to support this database
-  enable_extension "plpgsql"
-
   create_table "categories", force: :cascade do |t|
     t.string "name", null: false
     t.datetime "created_at", null: false
@@ -22,8 +19,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_08_19_164215) do
 
   create_table "post_comments", force: :cascade do |t|
     t.string "content"
-    t.bigint "post_id", null: false
-    t.bigint "user_id", null: false
+    t.integer "post_id", null: false
+    t.integer "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "ancestry"
@@ -33,8 +30,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_08_19_164215) do
   end
 
   create_table "post_likes", force: :cascade do |t|
-    t.bigint "post_id", null: false
-    t.bigint "user_id", null: false
+    t.integer "post_id", null: false
+    t.integer "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["post_id"], name: "index_post_likes_on_post_id"
@@ -47,8 +44,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_08_19_164215) do
     t.text "body"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "creator_id"
-    t.bigint "category_id"
+    t.integer "creator_id"
+    t.integer "category_id"
     t.integer "post_likes_count", default: 0
     t.index ["category_id"], name: "index_posts_on_category_id"
     t.index ["creator_id"], name: "index_posts_on_creator_id"

@@ -72,6 +72,8 @@ group :development, :test do
   gem 'debug', platforms: %i[mri windows]
   # Faker is a library for generating fake data such as names, addresses, and phone numbers.
   gem 'faker'
+  # Use sqlite3 as the database for Active Record
+  gem "sqlite3", "~> 1.4"
 end
 
 group :development do

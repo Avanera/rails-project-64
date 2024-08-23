@@ -9,11 +9,11 @@ This is a simple blogging platform built with Ruby on Rails 7, using PostgreSQL 
 
 Ruby version: 3.2.2
 Rails version: 7.x
-Database: PostgreSQL
+Development/Test Database: sqlite3
+Production Database: PostgreSQL
 
 ## System Dependencies
 
-Ensure you have PostgreSQL installed and running on your machine.
 Node.js and Yarn are required for managing frontend assets.
 
 ## Configuration
