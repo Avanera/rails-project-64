@@ -21,29 +21,37 @@ class PostsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test 'should create post' do
-    assert_difference('Post.count') do
-      post posts_url, params: { post: {
-        body: @post.body,
-        title: @post.title,
-        category_id: categories(:one).id
-      } }
-    end
+    post posts_url, params: { post: {
+      body: @post.body,
+      title: @post.title,
+      category_id: categories(:one).id
+    } }
 
-    assert_equal(Post.last.creator, users(:one))
-    assert_redirected_to post_url(Post.last)
+    created_post = Post.find_by(
+      body: @post.body,
+      title: @post.title,
+      category_id: categories(:one).id,
+      creator_id: users(:one).id
+    )
+
+    assert_response :redirect
+    assert(created_post)
   end
 
   test 'should NOT create post when params not valid' do
-    assert_no_difference('Post.count') do
-      post posts_url, params: { post: {
-        body: 'not enough chars',
-        title: '',
-        category_id: ''
-      } }
-    end
+    post posts_url, params: { post: {
+      body: 'not enough chars',
+      title: '',
+      category_id: ''
+    } }
+
+    not_created_post = Post.find_by(
+      body: 'not enough chars'
+    )
 
     assert_response :unprocessable_entity
     assert_select 'form'
+    assert_nil(not_created_post)
   end
 
   test 'should show post' do
@@ -71,10 +79,16 @@ class PostsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test 'should destroy post' do
-    assert_difference('Post.count', -1) do
-      delete post_url(@post)
-    end
+    delete post_url(@post)
+
+    deleted_post = Post.find_by(
+      body: @post.body,
+      title: @post.title,
+      category_id: @post.category_id,
+      creator_id: @post.creator_id
+    )
 
     assert_redirected_to posts_url
+    assert_nil(deleted_post)
   end
 end

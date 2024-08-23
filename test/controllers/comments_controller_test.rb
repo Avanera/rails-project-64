@@ -10,29 +10,42 @@ class CommentsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test 'should create a comment' do
-    assert_difference('PostComment.count') do
-      post post_comments_path(post_id: Post.last.id),
-           params: { post_comment: { content: 'MyString' } }
-    end
+    post post_comments_path(post_id: Post.last.id),
+         params: { post_comment: { content: 'MyString' } }
+    created_comment = PostComment.find_by(
+      content: 'MyString',
+      post_id: Post.last.id,
+      user_id: users(:one).id
+    )
 
-    assert_equal(PostComment.last.user, users(:one))
     assert_redirected_to post_url(Post.last)
+    assert(created_comment)
   end
 
   test 'should not create an empty comment' do
-    assert_no_difference('PostComment.count') do
-      post post_comments_path(post_id: Post.last.id),
-           params: { post_comment: { content: '' } }
-    end
+    post post_comments_path(post_id: Post.last.id),
+         params: { post_comment: { content: '' } }
+
+    not_created_comment = PostComment.find_by(
+      content: ''
+    )
 
     assert_redirected_to post_url(Post.last)
+    assert_nil(not_created_comment)
   end
 
   test 'should destroy comment' do
-    assert_difference('PostComment.count', -1) do
-      delete comment_path(PostComment.last)
-    end
+    comment = PostComment.last
+
+    delete comment_path(comment)
+
+    deleted_comment = PostComment.find_by(
+      content: comment.content,
+      post_id: comment.post_id,
+      user_id: comment.user_id
+    )
 
     assert_redirected_to post_path(posts(:with_comments))
+    assert_nil(deleted_comment)
   end
 end
