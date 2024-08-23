@@ -8,6 +8,9 @@ AllCops:
     - 'script/**/*'
     - 'bin/*'
     - 'Gemfile'
+Metrics/BlockLength:
+  Exclude:
+    - 'config/**/*'
 
 Style/Documentation:
   Enabled: false

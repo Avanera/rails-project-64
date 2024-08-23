@@ -1,7 +1,9 @@
+# frozen_string_literal: true
+
 Sentry.init do |config|
   config.dsn = Rails.application.credentials.sentry_dsn
 
-  config.breadcrumbs_logger = [:active_support_logger, :http_logger]
+  config.breadcrumbs_logger = %i[active_support_logger http_logger]
 
   # Set traces_sample_rate to 1.0 to capture 100%
   # of transactions for performance monitoring.

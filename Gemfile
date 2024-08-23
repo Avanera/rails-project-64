@@ -53,12 +53,12 @@ gem 'slim-rails'
 gem 'simple_form'
 
 # Sentry's Ruby SDK allows users to report messages, exceptions, and tracing events.
-gem 'stackprof'
-gem 'sentry-ruby'
 gem 'sentry-rails'
+gem 'sentry-ruby'
+gem 'stackprof'
 
 # a flexible authentication solution for Rails based on Warden
-gem "devise", "~> 4.9"
+gem 'devise', '~> 4.9'
 gem 'devise-i18n'
 
 # Ancestry is a gem that allows rails ActiveRecord models to be organized as a tree structure (or hierarchy)
@@ -73,7 +73,7 @@ group :development, :test do
   # Faker is a library for generating fake data such as names, addresses, and phone numbers.
   gem 'faker'
   # Use sqlite3 as the database for Active Record
-  gem "sqlite3", "~> 1.4"
+  gem 'sqlite3', '~> 1.4'
 end
 
 group :development do
