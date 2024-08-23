@@ -27,6 +27,6 @@ module PostsHelper
   def current_post_like(post)
     return unless current_user
 
-    post.post_likes.find { |like| like.user_id == current_user.id }
+    post.likes.find { |like| like.user_id == current_user.id }
   end
 end

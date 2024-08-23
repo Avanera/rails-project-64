@@ -51,7 +51,7 @@ class PostsController < ApplicationController
   def set_post_with_comments
     @post = Post
             .joins(:category, :creator)
-            .includes(:post_likes, comments: :user)
+            .includes(:likes, comments: :user)
             .find(params[:id])
   end
 
