@@ -60,6 +60,8 @@ ru:
         post_comment:
           content:
             blank: Тело комментария не может быть пустым
+        post_like:
+          already_liked: Вы уже поставили лайк этому посту
         user:
           attributes:
             password:

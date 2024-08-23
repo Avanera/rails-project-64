@@ -8,3 +8,5 @@ en:
         post_comment:
           content:
             blank: The body of the comment can not be blank
+        post_like:
+          already_liked: You have already liked the post
