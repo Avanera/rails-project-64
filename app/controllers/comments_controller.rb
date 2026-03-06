@@ -2,35 +2,40 @@
 
 class CommentsController < ApplicationController
   before_action :authenticate_user!
+  before_action :set_post
+  before_action :set_comment, only: [:destroy]
 
   def create
-    post = Post.find(params[:post_id])
-    @comment = build_comment(post)
+    @comment = @post.post_comments.build(comment_params)
+    @comment.creator = current_user
 
     if @comment.save
-      redirect_to post_path(post), notice: t('comments.created')
+      redirect_to @post, notice: t(".success")
     else
-      redirect_to post_path(post), alert: @comment.errors.full_messages.join('. ')
+      redirect_to @post, alert: @comment.errors.full_messages.to_sentence
     end
   end
 
   def destroy
-    comment = PostComment.find(params[:id])
-    return if comment.user != current_user
-
-    post = comment.post
-    comment.destroy
-
-    redirect_to post_path(post), notice: t('comments.destroyed')
+    if @comment.creator == current_user
+      @comment.destroy
+      redirect_to @post, notice: t(".success")
+    else
+      redirect_to @post, alert: t(".unauthorized")
+    end
   end
 
   private
 
-  def comment_params
-    params.require(:post_comment).permit(:content, :parent_id)
+  def set_post
+    @post = Post.find(params[:post_id])
   end
 
-  def build_comment(post)
-    post.comments.build(comment_params.merge(user: current_user))
+  def set_comment
+    @comment = @post.post_comments.find(params[:id])
+  end
+
+  def comment_params
+    params.expect(post_comment: %i[content parent_id])
   end
 end

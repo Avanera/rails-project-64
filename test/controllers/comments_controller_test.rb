@@ -1,51 +1,79 @@
 # frozen_string_literal: true
 
-require 'test_helper'
+require "test_helper"
 
 class CommentsControllerTest < ActionDispatch::IntegrationTest
-  include Devise::Test::IntegrationHelpers
-
   setup do
-    sign_in users(:one)
+    @user = users(:one)
+    @other_user = users(:two)
+    @post = posts(:one)
   end
 
-  test 'should create a comment' do
-    post post_comments_path(post_id: Post.last.id),
-         params: { post_comment: { content: 'MyString' } }
-    created_comment = PostComment.find_by(
-      content: 'MyString',
-      post_id: Post.last.id,
-      user_id: users(:one).id
-    )
-
-    assert_redirected_to post_url(Post.last)
-    assert(created_comment)
+  test "should not create comment when not signed in" do
+    assert_no_difference("PostComment.count") do
+      post post_comments_path(@post), params: { post_comment: { content: "Test comment" } }
+    end
+    assert_redirected_to new_user_session_url
   end
 
-  test 'should not create an empty comment' do
-    post post_comments_path(post_id: Post.last.id),
-         params: { post_comment: { content: '' } }
+  test "should create comment when signed in" do
+    sign_in @user
+    assert_difference("PostComment.count", 1) do
+      post post_comments_path(@post), params: { post_comment: { content: "Test comment" } }
+    end
+    assert_redirected_to @post
 
-    not_created_comment = PostComment.find_by(
-      content: ''
-    )
-
-    assert_redirected_to post_url(Post.last)
-    assert_nil(not_created_comment)
-  end
-
-  test 'should destroy comment' do
     comment = PostComment.last
+    assert_equal @user.id, comment.creator_id
+    assert_equal @post.id, comment.post_id
+    assert_equal "Test comment", comment.content
+  end
 
-    delete comment_path(comment)
+  test "should create nested comment" do
+    sign_in @user
+    parent = @post.post_comments.create!(creator: @user, content: "Parent comment")
 
-    deleted_comment = PostComment.find_by(
-      content: comment.content,
-      post_id: comment.post_id,
-      user_id: comment.user_id
-    )
+    assert_difference("PostComment.count", 1) do
+      post post_comments_path(@post), params: {
+        post_comment: {
+          content: "Nested comment",
+          parent_id: parent.id
+        }
+      }
+    end
+    assert_redirected_to @post
 
-    assert_redirected_to post_path(posts(:with_comments))
-    assert_nil(deleted_comment)
+    comment = PostComment.last
+    assert_not_nil comment.ancestry
+    assert comment.ancestry.include?(parent.id.to_s)
+  end
+
+  test "should destroy own comment" do
+    sign_in @user
+    comment = @post.post_comments.create!(creator: @user, content: "Test comment")
+
+    assert_difference("PostComment.count", -1) do
+      delete post_comment_path(@post, comment)
+    end
+    assert_redirected_to @post
+  end
+
+  test "should not destroy someone else's comment" do
+    sign_in @user
+    comment = @post.post_comments.create!(creator: @other_user, content: "Test comment")
+
+    assert_no_difference("PostComment.count") do
+      delete post_comment_path(@post, comment)
+    end
+    assert_redirected_to @post
+  end
+
+  test "should not destroy comment when not signed in" do
+    comment = @post.post_comments.create!(creator: @user, content: "Test comment")
+
+    assert_no_difference("PostComment.count") do
+      delete post_comment_path(@post, comment)
+    end
+    assert_redirected_to new_user_session_url
   end
 end

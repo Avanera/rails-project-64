@@ -1,78 +1,69 @@
 ru:
-  locales:
-    en: Switch to English
-    ru: Перейти на Русский
-
-  support:
-    array:
-      last_word_connector: ' и '
-      two_words_connector: ' и '
-
+  simple_form:
+    required:
+      text: 'обязательное поле'
+      mark: '*'
+    error_notification:
+      default_message: 'Обнаружены ошибки, пожалуйста, ознакомьтесь с ними ниже:'
+  
   helpers:
     submit:
+      user:
+        create: 'Регистрация'
+        update: 'Обновить'
       post:
-        create: Опубликовать
-        update: Редактировать
-      post_comment:
-        create: Опубликовать комментарий
-
-  actions:
-    back: Назад
-    delete:
-      confirm: Вы уверены?
-
-  auth:
-    log_in: Войти
-    log_out: Выйти
-    sign_up: Зарегистрироваться
-
-  comments:
-    answer: Ответить
-    created: Комментарий создан.
-    creation:
-      errors:
-        one: "%{count} ошибка не позволила сохранить этот комментарий:"
-        few: "%{count} ошибки не позволили сохранить этот комментарий:"
-        many: "%{count} ошибок не позволили сохранить этот комментарий:"
-    delete: Удалить
-    destroyed: Комментарий удален.
-    label: 'Оставьте свой комментарий тут:'
-    submit: Опубликовать комментарий
-
-  footer:
-    contact_us: 'Свяжитесь с нами: support@example.com'
-    powered: Работает на Ruby on Rails | Devise | Bootstrap
-
+        create: 'Создать пост'
+        update: 'Обновить пост'
+    label:
+      user:
+        email: 'Email'
+        password: 'Пароль'
+        password_confirmation: 'Подтверждение пароля'
+        remember_me: 'Запомнить меня'
+  
+  devise:
+    sessions:
+      new:
+        sign_in: 'Войти'
+    registrations:
+      new:
+        sign_up: 'Регистрация'
+  
   posts:
-    actions:
-      created: Пост был успешно создан.
-      creation:
-        errors:
-          one: "%{count} ошибка не позволила сохранить этот пост:"
-          few: "%{count} ошибки не позволили сохранить этот пост:"
-          many: "%{count} ошибок не позволили сохранить этот пост:"
-      delete: Удалить
-      deleted: Пост был удален.
-      editing: Редактирование поста
-      update: Редактировать
-      updated: Пост был успешно отредактирован.
-      submit: Опубликовать
-    all: Все посты
-    body: Содержание
-    by: Автор
-    category: Категория
-    liked: Понравилось
-    new: Новый пост
-    published: Опубликовано
-    posts: Посты
-    symbols: символов
-    title: Заголовок
-
-  time:
-    formats:
-      short: "%d.%m.%Y %H:%M"
-
-  views:
-    posts:
-      index:
-        title: Коллективный блог
+    new:
+      title: 'Новый пост'
+    edit:
+      title: 'Редактировать пост'
+    index:
+      new_post_link: 'Новый пост'
+    form:
+      title_label: 'Заголовок'
+      body_label: 'Содержание'
+      submit: 'Создать пост'
+    create:
+      success: 'Пост успешно создан'
+    update:
+      success: 'Пост успешно обновлен'
+    destroy:
+      success: 'Пост удален'
+    unauthorized: 'У вас нет прав для этого действия'
+  
+  comments:
+    create:
+      success: 'Комментарий успешно добавлен'
+      error: 'Ошибка при добавлении комментария'
+    destroy:
+      success: 'Комментарий удален'
+      unauthorized: 'Вы не можете удалить чужой комментарий'
+  
+  likes:
+    create:
+      success: 'Лайк поставлен'
+      error: 'Ошибка при добавлении лайка'
+    destroy:
+      success: 'Лайк убран'
+      unauthorized: 'Вы не можете удалить чужой лайк'
+  
+  back: 'Назад'
+  to_list: 'К списку'
+  

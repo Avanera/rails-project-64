@@ -1,39 +1,45 @@
-.container.my-4
-  => link_to t('posts.posts'), posts_path
-  | /
-  =< @post.category.name
+h1 = @post.title
 
-  div id="#{dom_id @post}"
-    .small.mt-3
-        = t('posts.published')
-        | :
-        =< l(@post.created_at, format: :short)
-        | &nbsp; &nbsp; &nbsp;
-        = t('posts.by')
-        | :
-        =< @post.creator.email
+.mb-3
+  span.badge.bg-secondary = @post.category.name if @post.category
+  |  | 
+  span.text-muted = @post.creator.email
+  |  | 
+  span.text-muted = time_ago_in_words(@post.created_at) + ' назад'
 
-    h1.mb-3 = @post.title
+.card.mb-4
+  .card-body
+    p.card-text = @post.body
+  .card-footer.text-muted.d-flex.justify-content-between.align-items-center
+    div
+      | Понравилось: #{@post.post_likes.count}
+    div
+      - if user_signed_in?
+        - if @post.liked_by?(current_user)
+          = button_to '💔', post_like_path(@post, current_user.created_likes.find_by(post: @post)), method: :delete, class: 'btn btn-sm btn-outline-danger'
+        - else
+          = button_to '❤️', post_likes_path(@post), method: :post, class: 'btn btn-sm btn-outline-success'
+      - else
+        span = link_to '❤️', new_user_session_path, class: 'btn btn-sm btn-outline-secondary'
 
-    p = @post.body
+h2.mt-4 Комментарии
 
-    = @post.post_likes_count
-    = render_post_likes_icon(@post)
+- if user_signed_in?
+  .card.mb-3
+    .card-body
+      = form_with(model: [@post, PostComment.new], url: post_comments_path(@post), local: true) do |f|
+        .mb-3
+          = f.label :content, 'Текст комментария', class: 'form-label'
+          = f.text_area :content, class: 'form-control', rows: 3
+        = f.submit 'Отправить', class: 'btn btn-primary'
 
-  - if current_user && @post.creator == current_user
-    .btn-group.btn-group-sm.mt-3 role='group' aria-label='Post button group'
-      = button_to t('posts.actions.update'),
-        edit_post_path(@post),
-        method: :get,
-        class: 'btn btn-primary'
-
-      p = link_to t('posts.actions.delete'),
-          post_path(@post),
-          data: { turbo_method: :delete, turbo_confirm: t('actions.delete.confirm') },
-          class: 'btn btn-outline-danger'
-
-  - if current_user
-    = render '/comments/form', comment: @post.comments.build, url: post_comments_path(@post)
-
-  = render partial: '/comments/comment',
-    collection: @post.comments.where(ancestry: nil).order(created_at: :desc).to_a
+- @post.post_comments.roots.order(created_at: :desc).each do |comment|
+  .card.mb-2
+    .card-body
+      .d-flex.justify-content-between
+        strong = comment.creator.email
+        span.text-muted.small = time_ago_in_words(comment.created_at) + ' назад'
+      p.mt-2.mb-1 = comment.content
+      - if user_signed_in? && comment.creator == current_user
+        = button_to 'Удалить', post_comment_path(@post, comment), method: :delete, class: 'btn btn-sm btn-outline-danger', data: { confirm: 'Вы уверены?' }
+        

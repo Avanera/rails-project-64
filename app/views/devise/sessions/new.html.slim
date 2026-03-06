@@ -1,16 +1,11 @@
-h2 = t('devise.sessions.new.sign_in')
+h2 Войти
 
 = simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
-  = f.error_notification
-  - if f.object.errors[:base].present?
-    = f.error_notification message: f.object.errors[:base].to_sentence
-
   .form-inputs
-    = f.input :email
-    = f.input :password
+    = f.input :email, required: true, autofocus: true, label: 'Email *'
+    = f.input :password, required: true, label: 'Пароль *'
+    = f.input :remember_me, as: :boolean, label: 'Запомнить меня' if devise_mapping.rememberable?
 
-    - if devise_mapping.rememberable?
-      = f.input :remember_me, as: :boolean
-
-  .form-actions.mb-3
-    = f.button :submit, t('devise.shared.links.sign_in'), class: 'btn btn-primary'
+  .form-actions
+    = f.button :submit, 'Войти', class: 'btn btn-primary'
+    

@@ -1,25 +1,44 @@
 doctype html
 html
   head
-    title
-      | RailsProject64
-    meta[name='viewport' content='width=device-width,initial-scale=1']
+    title = content_for(:title) || "Коллективный блог"
+    meta name="viewport" content="width=device-width, initial-scale=1"
     = csrf_meta_tags
     = csp_meta_tag
-    = stylesheet_link_tag 'application', 'data-turbo-track': 'reload'
-    = javascript_include_tag 'application', 'data-turbo-track': 'reload', type: 'module'
-  body
+    = stylesheet_link_tag "application", "data-turbo-track": "reload"
+    = javascript_include_tag "application", "data-turbo-track": "reload", type: "module"
 
-    header
-      = render 'layouts/application/nav'
+  body.d-flex.flex-column.h-100
+    nav.navbar.navbar-expand-md.navbar-dark.bg-dark.fixed-top
+      .container-fluid
+        = link_to "Коллективный блог", root_path, class: "navbar-brand"
+        button.navbar-toggler type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"
+          span.navbar-toggler-icon
+        #navbarCollapse.collapse.navbar-collapse
+          ul.navbar-nav.ms-auto
+            - if user_signed_in?
+              li.nav-item
+                = button_to 'Выйти', destroy_user_session_path, method: :delete, class: 'btn btn-outline-light'
+            - else
+              li.nav-item
+                = link_to 'Вход', new_user_session_path, class: 'nav-link'
+              li.nav-item
+                = link_to 'Регистрация', new_user_registration_path, class: 'nav-link'
 
-    main.mt-5.pt-3
+    main.flex-shrink-0.mt-5.pt-3
       .container
-        = render 'layouts/application/flash'
+        - if notice
+          .alert.alert-success.alert-dismissible.fade.show role="alert"
+            = notice
+            button.btn-close type="button" data-bs-dismiss="alert" aria-label="Close"
+        - if alert
+          .alert.alert-danger.alert-dismissible.fade.show role="alert"
+            = alert
+            button.btn-close type="button" data-bs-dismiss="alert" aria-label="Close"
+
         = yield
 
-  footer
-    .container.footer.sticky-bottom.py-3.bg-light.text-muted
-      = t('footer.powered')
-      br
-      = t('footer.contact_us')
+    footer.footer.mt-auto.py-3.bg-light
+      .container.text-center
+        span.text-muted Коллективный блог — учебный проект Hexlet
+        

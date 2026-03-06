@@ -1,12 +1,10 @@
 # frozen_string_literal: true
 
 class User < ApplicationRecord
-  # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :validatable
+         :recoverable, :rememberable, :validatable, :confirmable
 
-  has_many :posts, dependent: nil, inverse_of: 'creator'
-  has_many :comments, class_name: 'PostComment', dependent: :destroy
-  has_many :likes, class_name: 'PostLike', dependent: :destroy
+  has_many :created_posts, class_name: "Post", foreign_key: "creator_id", inverse_of: :creator, dependent: :destroy
+  has_many :created_comments, class_name: "PostComment", foreign_key: "creator_id", inverse_of: :creator, dependent: :destroy
+  has_many :created_likes, class_name: "PostLike", foreign_key: "creator_id", inverse_of: :creator, dependent: :destroy
 end

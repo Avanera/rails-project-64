@@ -1,137 +1,95 @@
-## Hexlet tests and linter status:
-[![Actions Status](https://github.com/Avanera/rails-project-64/actions/workflows/hexlet-check.yml/badge.svg)](https://github.com/Avanera/rails-project-64/actions)
+# Collective Blog (Habr-like)
 
-Deployed application link: https://rails-project-64-0rax.onrender.com/
+[![CI](https://github.com/Konstantin82off/rails-project-64/actions/workflows/ci.yml/badge.svg)](https://github.com/Konstantin82off/rails-project-64/actions/workflows/ci.yml)
+[![Hexlet Check](https://github.com/Konstantin82off/rails-project-64/actions/workflows/hexlet-check.yml/badge.svg)](https://github.com/Konstantin82off/rails-project-64/actions/workflows/hexlet-check.yml)
 
-This is a simple blogging platform built with Ruby on Rails 7, using PostgreSQL for the database, and Slim for templating. The project includes features such as user authentication, post creation, commenting, and liking posts.
+Educational project on Ruby on Rails. A collective blog where users can create posts, publish them in categories, comment, and rate other authors' publications.
 
-## Prerequisites
+## Deployment
 
-Ruby version: 3.2.2
-Rails version: 7.x
-Development/Test Database: sqlite3
-Production Database: PostgreSQL
+The application is available at: [https://rails-project-64-vtkz.onrender.com](https://rails-project-64-vtkz.onrender.com)
 
-## System Dependencies
+## Tech Stack
 
-Node.js and Yarn are required for managing frontend assets.
+- **Ruby** 3.4.4
+- **Rails** 8.1.2
+- **Database:** SQLite (development/test), PostgreSQL (production)
+- **Frontend:** Bootstrap 5, esbuild
+- **Template Engine:** Slim
+- **Forms:** Simple Form
+- **Linters:** RuboCop, Slim-Lint
+- **Testing:** Minitest, Power Assert
+- **Error Tracking:** Honeybadger
+- **Deployment:** Render.com
 
-## Configuration
+## Project Requirements
 
-1. Clone the repository:
+- Model names and attributes must match those given in the steps
+- Routing must match the demo project
+- Ruby 3.4.4
+- Rails 8.0+
+
+## Local Development
+
 ```bash
-git clone https://github.com/Avanera/rails-project-64.git
+# Clone the repository
+git clone https://github.com/Konstantin82off/rails-project-64.git
 cd rails-project-64
-```
-2. Install required gems:
-```bash
+
+# Install dependencies
 bundle install
-```
-3. Install JavaScript dependencies:
-```bash
 yarn install
+
+# Create database
+bin/rails db:create
+bin/rails db:migrate
+
+# Start development server
+bin/dev
 ```
 
-## Database Setup
+The application will be available at: [http://localhost:3000](http://localhost:3000/)
 
-1. Create the database:
+## **Database Structure**
+
+The project uses the following models:
+
+- **User** — users
+- **Post** — posts
+- **Category** — categories
+- **Comment** — comments
+- **Like** — post ratings
+
+## **Testing**
+
 ```bash
-rails db:create
-```
-2. Run the migrations:
-```bash
-rails db:migrate
-```
-3. Seed the database:
-```bash
-rails db:seed
-```
+# Run all tests
+bin/rails test
 
-## Running the Application
+# Run system tests
+bin/rails test:system
 
-1. Start the Rails server:
-```bash
-make start
-```
-2. Navigate to http://localhost:3000 to view the application.
-
-## How to Run the Test Suite
-
-The project uses minitest and power_assert for testing. To run the tests:
-```bash
-make test
+# Run linters
+bundle exec rubocop
+bundle exec slim-lint app/views
 ```
 
-## Linting
+## **Deployment on Render**
 
-- Rubocop: Ensure your code adheres to the style guide.
-- Slim Lint: Check your Slim templates for any issues.
-```bash
-make lint
-```
+The project is configured for deployment on [Render.com](https://render.com/) via [render.yaml](https://render.yaml/). Pushing to main or development branch automatically triggers build and deployment.
 
-## Deployment Instructions for Render
+## **CI/CD**
 
-Go to the [Render instance of the project](https://dashboard.render.com/web/srv-cq6b3gks1f4s73dvcua0).
+GitHub Actions is configured for automatic code checks:
 
-Click 'Manual Deploy' -> Select 'Deploy Latest Commit'
+- Linters (RuboCop, Slim-Lint)
+- Security checks (Brakeman, bundler-audit)
+- Tests (minitest)
+- System tests
 
-In case you need to deploy a new instance on Render read the instructions [here](https://docs.render.com/deploy-rails)
+The status badges at the top show the latest build status for both CI and Hexlet checks.
 
+## **License**
 
-## How to Use the Project
-
-#### Sign Up / Log In:
-First, sign up for a new account or log in with an existing account.
-
-#### Create a Post:
-Navigate to the "New Post" section.
-Choose a category from the list (pre-defined in the database) and provide a title and body for your post.
-Submit the form to create your post.
-
-#### View Posts:
-All posts will be listed on the homepage. You can click on any post title to view the full content.
-
-#### Comment on Posts:
-Under each post, there is an option to leave a comment. You can also reply to existing comments to create a threaded discussion.
-
-#### Like Posts:
-If you like a post, simply click on the "Like" button to show your appreciation. You can undo this action by clicking the 'Like' button again.
-
-#### Predefined Categories:
-Categories are pre-created in the database through seeds. You can select any of these categories when creating a new post.
-
-## Examples
-
-Creating a Post:
-  Example of creating a new post:
-
-```ruby
-Post.create(
-  title: "My First Post",
-  body: "This is the content of my first post.",
-  category_id: 1,
-  creator_id: 1
-)
-```
-
-Adding a Comment:
-  Example of adding a comment to a post:
-
-```ruby
-PostComment.create(
-  content: "Great post!",
-  post_id: 1,
-  user_id: 1
-)
-```
-
-Liking a Post:
-  Example of liking a post:
-
-```ruby
-PostLike.create(
-  post_id: 1,
-  user_id: 1
-)
-```
+Educational project from Hexlet
+# Test

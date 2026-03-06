@@ -2,17 +2,32 @@
 
 class LikesController < ApplicationController
   before_action :authenticate_user!
+  before_action :set_post
 
   def create
-    post = Post.find(params[:post_id])
-    post.likes.find_or_create_by(user: current_user)
-    redirect_to post_path(post)
+    @like = current_user.created_likes.build(post: @post)
+
+    if @like.save
+      redirect_to @post, notice: t(".success")
+    else
+      redirect_to @post, alert: @like.errors.full_messages.to_sentence
+    end
   end
 
   def destroy
-    post = Post.find(params[:post_id])
-    post.likes.find_by(user: current_user)&.destroy
+    @like = @post.post_likes.find_by(creator: current_user)
 
-    redirect_to post_path(post)
+    if @like
+      @like.destroy
+      redirect_to @post, notice: t(".success")
+    else
+      redirect_to @post, alert: t(".not_found"), status: :not_found
+    end
+  end
+
+  private
+
+  def set_post
+    @post = Post.find(params[:post_id])
   end
 end

@@ -1,14 +1,15 @@
-h2 = t('devise.registrations.new.sign_up')
+h2 Регистрация
 
 = simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f|
   = f.error_notification
-  - if f.object.errors[:base].present?
-    = f.error_notification message: f.object.errors[:base].to_sentence
 
   .form-inputs
-    = f.input :email
-    = f.input :password
-    = f.input :password_confirmation
+    = f.input :email, required: true, autofocus: true, label: 'Email *'
+    = f.input :password, required: true, label: 'Пароль *', hint: '(минимум 6 знаков)'
+    = f.input :password_confirmation, required: true, label: 'Подтверждение пароля *'
 
-  .form-actions.mb-3
-    = f.button :submit, t('devise.registrations.new.sign_up'), class: 'btn btn-primary'
+  .form-actions
+    = f.button :submit, 'Регистрация', class: 'btn btn-primary'
+
+  = link_to 'Войти', new_session_path(resource_name)
+  

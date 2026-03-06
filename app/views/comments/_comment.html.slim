@@ -1,34 +1,23 @@
-.card.card-body.py-0.my-3
-  .card-header.border-0
-    small
-      =< comment.user.email
-      | &nbsp; &nbsp; &nbsp;
-      =< l(comment.created_at, format: :short)
+.comment.mb-3.p-3.bg-light.rounded
+  .d-flex.justify-content-between.align-items-center
+    strong = comment.user.email
+    small.text-muted = time_ago_in_words(comment.created_at)
+  p.mt-2 = comment.content
 
-  .card-text
-    = comment.content
-    | &nbsp;
-    - if comment.user == current_user
-      = link_to t('comments.delete'),
-        comment_path(comment),
-        data: { turbo_method: :delete, turbo_confirm: t('actions.delete.confirm') }
+  - if user_signed_in?
+    button.btn.btn-sm.btn-link.text-primary type="button" data-bs-toggle="collapse" data-bs-target="#reply-form-#{comment.id}"
+      | Ответить
 
-  - if current_user
-    .card-footer.border-0
-      a.fs-6.text-decoration-underline.text-lowercase.collapsed [
-        data-bs-toggle='collapse'
-        href='#' type='button'
-        data-bs-target="#response_comment-#{comment.id}"
-        aria-expanded='false'
-        aria-controls="response_comment-#{comment.id}"
-      ]
-        = t('comments.answer')
+    div.collapse.mt-2 id="reply-form-#{comment.id}"
+      = simple_form_for [@post, PostComment.new], html: { class: 'mb-2' } do |f|
+        = f.input :content, as: :text, label: false, input_html: { rows: 2, class: 'form-control' }
+        = f.hidden_field :parent_id, value: comment.id
+        = f.submit 'Ответить', class: 'btn btn-sm btn-outline-primary'
 
-      div class='collapse' id="response_comment-#{comment.id}"
-        = render '/comments/form',
-          comment: @post.comments.build(parent_id: comment.id),
-          url: post_comments_path(@post)
+  - if comment.user == current_user
+    = button_to 'Удалить', post_comment_path(@post, comment), method: :delete, class: 'btn btn-sm btn-outline-danger mt-2', data: { confirm: 'Удалить комментарий?' }
 
-  - if comment.has_children?
-    = render partial: '/comments/comment',
-      collection: comment.children.order(created_at: :desc).reject(&:new_record?)
+  - if comment.children.any?
+    .children.mt-3.ms-4
+      = render partial: 'comments/comment', collection: comment.children.order(created_at: :desc), as: :comment
+      

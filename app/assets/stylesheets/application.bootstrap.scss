@@ -1,2 +1,21 @@
 @import 'bootstrap/scss/bootstrap';
 @import 'bootstrap-icons/font/bootstrap-icons';
+
+span.required {
+  cursor: help;
+  text-decoration: underline dotted;
+  text-underline-offset: 2px;
+}
+
+span.error {
+  color: red;
+  display: block;
+  font-size: 0.9em;
+  margin-top: 5px;
+}
+
+.form-text {
+  color: #6c757d;
+  font-size: 0.875em;
+  margin-top: 0.25rem;
+}

@@ -1,25 +1,12 @@
-# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
-
 one:
-  content: first
-  user: one
-  post: with_comments
-  ancestry: /
+  content: "Первый комментарий"
+  creator: one
+  post: one
+  ancestry: "/"
 
-with_comments:
-  content: this is comment with comments
-  user: one
-  post: with_comments
-  ancestry: /
-
-nested:
-  content: commented comment
-  user: one
-  post: with_comments
-  ancestry: /<%= ActiveRecord::FixtureSet.identify(:with_comments) %>/
-
-deep_nested:
-  content: deep comment
-  user: one
-  post: with_comments
-  ancestry: /<%= [ActiveRecord::FixtureSet.identify(:with_comments), ActiveRecord::FixtureSet.identify(:nested)].join('/') %>/
+two:
+  content: "Ответ на первый комментарий"
+  creator: two
+  post: one
+  ancestry: "/<%= ActiveRecord::FixtureSet.identify(:one) %>/"
+  
