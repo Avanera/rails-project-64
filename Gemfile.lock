@@ -85,6 +85,7 @@ GEM
     base64 (0.3.0)
     bcrypt (3.1.21)
     bcrypt_pbkdf (1.1.2)
+    bcrypt_pbkdf (1.1.2-arm64-darwin)
     benchmark (0.5.0)
     bigdecimal (4.0.1)
     bindex (0.8.1)
@@ -135,6 +136,7 @@ GEM
     ffi (1.17.3-aarch64-linux-musl)
     ffi (1.17.3-arm-linux-gnu)
     ffi (1.17.3-arm-linux-musl)
+    ffi (1.17.3-arm64-darwin)
     ffi (1.17.3-x86_64-linux-gnu)
     ffi (1.17.3-x86_64-linux-musl)
     flash_rails_messages (2.3.0)
@@ -147,9 +149,6 @@ GEM
     honeybadger (6.4.0)
       logger
       ostruct
-    hpricot (0.8.6)
-    html2slim (0.2.0)
-      hpricot
     i18n (1.14.8)
       concurrent-ruby (~> 1.0)
     i18n-debug (1.2.0)
@@ -231,6 +230,8 @@ GEM
       racc (~> 1.4)
     nokogiri (1.19.1-arm-linux-musl)
       racc (~> 1.4)
+    nokogiri (1.19.1-arm64-darwin)
+      racc (~> 1.4)
     nokogiri (1.19.1-x86_64-linux-gnu)
       racc (~> 1.4)
     nokogiri (1.19.1-x86_64-linux-musl)
@@ -246,6 +247,7 @@ GEM
     pg (1.6.3)
     pg (1.6.3-aarch64-linux)
     pg (1.6.3-aarch64-linux-musl)
+    pg (1.6.3-arm64-darwin)
     pg (1.6.3-x86_64-linux)
     pg (1.6.3-x86_64-linux-musl)
     power_assert (3.0.1)
@@ -422,6 +424,7 @@ GEM
     sqlite3 (2.9.0-aarch64-linux-musl)
     sqlite3 (2.9.0-arm-linux-gnu)
     sqlite3 (2.9.0-arm-linux-musl)
+    sqlite3 (2.9.0-arm64-darwin)
     sqlite3 (2.9.0-x86_64-linux-gnu)
     sqlite3 (2.9.0-x86_64-linux-musl)
     sshkit (1.25.0)
@@ -438,6 +441,7 @@ GEM
     thor (1.5.0)
     thruster (0.1.18)
     thruster (0.1.18-aarch64-linux)
+    thruster (0.1.18-arm64-darwin)
     thruster (0.1.18-x86_64-linux)
     tilt (2.7.0)
     timeout (0.6.0)
@@ -482,6 +486,7 @@ PLATFORMS
   aarch64-linux-musl
   arm-linux-gnu
   arm-linux-musl
+  arm64-darwin-24
   x86_64-linux-gnu
   x86_64-linux-musl
 
@@ -497,7 +502,6 @@ DEPENDENCIES
   faker
   flash_rails_messages
   honeybadger
-  html2slim
   i18n-debug
   image_processing (~> 1.2)
   jbuilder
