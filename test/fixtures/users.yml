@@ -4,14 +4,14 @@
 one:
   email: user1@example.com
   encrypted_password: <%= Devise::Encryptor.digest(User, 'password123') %>
-  confirmed_at: <%= Time.current %>
-  created_at: <%= Time.current %>
-  updated_at: <%= Time.current %>
+  confirmed_at: <%= 1.day.ago %>
+  created_at: <%= 1.day.ago %>
+  updated_at: <%= 1.day.ago %>
 
 two:
   email: user2@example.com
   encrypted_password: <%= Devise::Encryptor.digest(User, 'password123') %>
-  confirmed_at: <%= Time.current %>
-  created_at: <%= Time.current %>
-  updated_at: <%= Time.current %>
+  confirmed_at: <%= 1.day.ago %>
+  created_at: <%= 1.day.ago %>
+  updated_at: <%= 1.day.ago %>
   
