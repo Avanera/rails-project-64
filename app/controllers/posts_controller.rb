@@ -20,7 +20,7 @@ class PostsController < ApplicationController
   def edit; end
 
   def create
-    @post = current_user.created_posts.build(post_params)
+    @post = current_user.posts.build(post_params)
 
     if @post.save
       redirect_to @post, notice: t(".success")
